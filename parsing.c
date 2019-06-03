@@ -6,12 +6,13 @@
 /*   By: armoulin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:55:57 by armoulin          #+#    #+#             */
-/*   Updated: 2019/01/31 15:20:40 by armoulin         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:53:28 by sarbaill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+// Check if \n are well positionned, if there are only 4 '#' and the rest are '.'
 static t_bool	ft_read_one(const int fd, char *buffer)
 {
 	int res;
@@ -42,21 +43,21 @@ static t_bool	ft_read_one(const int fd, char *buffer)
 
 static int		ft_read_all(const int fd, int coords[26][4])
 {
-	char	buffer[21];
+	char	buffer[21]; //taille d'une piece
 	int		i;
-	int		nb_tetri;
+	int		nb_tetri; //tetri actuel 
 	int		j;
 
 	nb_tetri = 0;
-	while (nb_tetri < 26)
+	while (nb_tetri < 26) //tant qu'il y a encore des tetri (26 = limite)
 	{
 		if (!ft_read_one(fd, buffer))
 			return (0);
 		i = -1;
 		j = 0;
 		while (buffer[++i])
-			if (buffer[i] == '#')
-				coords[nb_tetri][j++] = i;
+			if (buffer[i] == '#') //if '#' we grab its position and store it in a list of int
+				coords[nb_tetri][j++] = i; //store position
 		nb_tetri++;
 		if (read(fd, buffer, 1))
 		{
@@ -64,7 +65,8 @@ static int		ft_read_all(const int fd, int coords[26][4])
 				return (0);
 		}
 		else
-			return (nb_tetri);
+			return (nb_tetri); // on part de cette fonction avec une list d'int de taille -
+								// - tetri total avec 4 ints (positions des '#') par tetri
 	}
 	return (0);
 }
@@ -128,10 +130,10 @@ int				ft_parsing(const int fd, int coords[26][4])
 	int tetri_total;
 	int nb_tetri;
 
-	if ((tetri_total = ft_read_all(fd, coords)) == 0)
+	if ((tetri_total = ft_read_all(fd, coords)) == 0) // En sortant de la on a une liste de coords et on														// sait que nos tetri sont a peu pres valide res														// e a checker que les pieces en elle meme le soit
 		return (0);
 	nb_tetri = 0;
-	while (nb_tetri < tetri_total)
+	while (nb_tetri < tetri_total) // Check la validite des pieces
 	{
 		if (!ft_check_piece(coords, nb_tetri))
 			return (0);

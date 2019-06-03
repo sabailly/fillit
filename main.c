@@ -6,14 +6,14 @@
 /*   By: armoulin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:53:46 by armoulin          #+#    #+#             */
-/*   Updated: 2019/01/31 14:52:13 by armoulin         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:51:58 by sarbaill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "fillit.h"
 
-t_tetri		*ft_store_coords(int coords[26][4], int tetri_total)
+t_tetri		*ft_store_coords(int coords[26][4], int tetri_total) // transform list of int into structure of posistion X Y 
 {
 	t_tetri		*tetris;
 	int			nb_tetri;

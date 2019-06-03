@@ -6,7 +6,7 @@
 /*   By: armoulin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 13:15:26 by armoulin          #+#    #+#             */
-/*   Updated: 2019/01/31 15:21:24 by armoulin         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:52:49 by sarbaill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char		*ft_create_grid(int min_size, char *grid)
 
 	if (grid)
 		free(grid);
-	max = min_size * (min_size + 1);
+	max = min_size * (min_size + 1); // si la racine est pas entiere on arrondi au dessus
 	grid = ft_strnew(max);
 	i = 0;
 	while (i < max)
@@ -72,7 +72,7 @@ void			ft_put_tetri(char *grid, int pos, t_tetri tetri, char letter)
 }
 
 static t_bool	ft_backtracking(t_tetri *tetris, int nb_tetri, int min_size,
-		char *grid)
+		char *grid) // pose tous les tretriminos et test toutes les possibilites
 {
 	int		pos;
 	t_bool	is_fixed;
